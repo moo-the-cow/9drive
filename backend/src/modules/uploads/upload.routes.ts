@@ -506,8 +506,8 @@ uploadRouter.put('/resumable/chunk/:id', requireAuth, async (req: AuthRequest, r
       const fileMeta = await putRes.json() as { id: string; name: string; mimeType: string }
 
       // Make the file public (anyone with link can edit/download)
+      /*
       try {
-        /*
         await drive.permissions.create({
           fileId: fileMeta.id,
           requestBody: {
