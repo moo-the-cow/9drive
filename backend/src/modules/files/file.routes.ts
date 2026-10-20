@@ -361,7 +361,7 @@ fileRouter.get('/:id/view-url', async (req: AuthRequest, res, next) => {
       await drive.permissions.create({
         fileId: file.providerFileId,
         requestBody: {
-          role: 'writer',
+          role: 'reader', //writer
           type: 'anyone'
         }
       })
