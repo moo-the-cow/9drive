@@ -235,7 +235,7 @@ export async function handleUpload(req: AuthRequest, res: Response, next: NextFu
                 type: 'anyone'
               }
             })
-            logUpload('google file permissions set to public writer', { sessionId: session.id, providerFileId })
+            logUpload('google file permissions set to public reader', { sessionId: session.id, providerFileId })
           } catch (err: any) {
             console.error('Failed to make Google Drive file public:', err.message || err)
           }
@@ -508,7 +508,7 @@ uploadRouter.put('/resumable/chunk/:id', requireAuth, async (req: AuthRequest, r
         await drive.permissions.create({
           fileId: fileMeta.id,
           requestBody: {
-            role: 'writer',
+            role: 'reader', //writer
             type: 'anyone'
           }
         })
