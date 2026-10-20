@@ -225,7 +225,9 @@ export async function handleUpload(req: AuthRequest, res: Response, next: NextFu
           uploadedMimeType = uploaded.data.mimeType ?? meta.mimeType
           logUpload('google upload completed', { sessionId: session.id, accountId: account.id, fileName })
 
+          /* edited by moo: SECURITY! */
           // Make the file public (anyone with link can edit/download)
+          /*
           try {
             await drive.permissions.create({
               fileId: providerFileId,
@@ -239,6 +241,7 @@ export async function handleUpload(req: AuthRequest, res: Response, next: NextFu
             console.error('Failed to make Google Drive file public:', err.message || err)
           }
         }
+        */
 
         if (streamedBytes !== meta.sizeBytes) {
           if (s3FileId) await prisma.file.update({ where: { id: s3FileId }, data: { status: 'deleted', deletedAt: new Date() } }).catch(() => undefined)
