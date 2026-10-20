@@ -227,6 +227,7 @@ export async function handleUpload(req: AuthRequest, res: Response, next: NextFu
 
           /* edited by moo: SECURITY! */
           // Make the file public (anyone with link can edit/download)
+          /*
           try {
             await drive.permissions.create({
               fileId: providerFileId,
@@ -239,6 +240,7 @@ export async function handleUpload(req: AuthRequest, res: Response, next: NextFu
           } catch (err: any) {
             console.error('Failed to make Google Drive file public:', err.message || err)
           }
+          */
         }
 
         if (streamedBytes !== meta.sizeBytes) {
@@ -505,6 +507,7 @@ uploadRouter.put('/resumable/chunk/:id', requireAuth, async (req: AuthRequest, r
 
       // Make the file public (anyone with link can edit/download)
       try {
+        /*
         await drive.permissions.create({
           fileId: fileMeta.id,
           requestBody: {
@@ -515,6 +518,7 @@ uploadRouter.put('/resumable/chunk/:id', requireAuth, async (req: AuthRequest, r
       } catch (err: any) {
         console.error('Failed to make Google Drive resumable file public:', err.message || err)
       }
+      */
 
       let existingFile = await prisma.file.findFirst({
         where: { providerFileId: fileMeta.id, userId: req.user!.id }
