@@ -240,8 +240,8 @@ export async function handleUpload(req: AuthRequest, res: Response, next: NextFu
           } catch (err: any) {
             console.error('Failed to make Google Drive file public:', err.message || err)
           }
+          */
         }
-        */
 
         if (streamedBytes !== meta.sizeBytes) {
           if (s3FileId) await prisma.file.update({ where: { id: s3FileId }, data: { status: 'deleted', deletedAt: new Date() } }).catch(() => undefined)
