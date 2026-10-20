@@ -310,15 +310,14 @@ fileRouter.post('/:id/public-permission', requireAuth, async (req: AuthRequest, 
     }
     const auth = await getAuthedGoogleClient(file.connectedAccount)
     const drive = google.drive({ version: 'v3', auth })
-    /* edited by moo: SECURITY!
+    /* edited by moo: SECURITY! */
     await drive.permissions.create({
       fileId: file.providerFileId,
       requestBody: {
-        role: 'writer',
+        role: 'reader', //writer
         type: 'anyone'
       }
     })
-    */
     const metadata = await drive.files.get({ fileId: file.providerFileId, fields: 'webViewLink,webContentLink' })
     return res.json({ status: 'ok', url: metadata.data.webViewLink ?? metadata.data.webContentLink })
   } catch (error: any) {
