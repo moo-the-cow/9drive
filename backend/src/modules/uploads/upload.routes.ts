@@ -227,12 +227,11 @@ export async function handleUpload(req: AuthRequest, res: Response, next: NextFu
 
           /* edited by moo: SECURITY! */
           // Make the file public (anyone with link can edit/download)
-          /*
           try {
             await drive.permissions.create({
               fileId: providerFileId,
               requestBody: {
-                role: 'writer',
+                role: 'reader', //writer
                 type: 'anyone'
               }
             })
@@ -240,7 +239,6 @@ export async function handleUpload(req: AuthRequest, res: Response, next: NextFu
           } catch (err: any) {
             console.error('Failed to make Google Drive file public:', err.message || err)
           }
-          */
         }
 
         if (streamedBytes !== meta.sizeBytes) {
